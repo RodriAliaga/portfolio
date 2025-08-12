@@ -17,9 +17,9 @@
   --muted: 240 5% 62%;
   --card: 240 8% 12%;
   --border: 240 8% 20%;
-  /* Green theme (dark adjustments) */
-  --primary: 142 72% 52%;
-  --accent: 160 84% 52%;
+  /* Blue theme (dark adjustments) */
+  --primary: 217 91% 66%;
+  --accent: 199 89% 60%;
 }
 
 @tailwind base;

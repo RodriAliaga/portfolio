@@ -14,8 +14,8 @@
   --card: #141722;
   --border: #283041;
   /* Green theme (dark): emerald/turf tones with AA contrast */
-  --primary: #22c55e; /* emerald 500 */
-  --accent: #16a34a;  /* emerald 600 */
+  --primary: #3b82f6; /* blue 500 */
+  --accent: #0ea5e9;  /* sky 500 */
   --shadow: 0 8px 24px rgba(0,0,0,0.25);
 }
 
@@ -27,8 +27,8 @@ html[data-theme="light"] {
   --card: #ffffff;
   --border: #e6e9f2;
   /* Green theme (light): deeper primary for contrast */
-  --primary: #16a34a; /* emerald 600 */
-  --accent: #22c55e;  /* emerald 500 */
+  --primary: #2563eb; /* blue 600 */
+  --accent: #3b82f6;  /* blue 500 */
   --shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 
