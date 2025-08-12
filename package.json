@@ -7,7 +7,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "deploy:vercel": "vercel --prod"
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.19"
@@ -22,4 +23,3 @@
     "typescript": "^5.5.4"
   }
 }
-
