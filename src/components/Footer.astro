@@ -1,0 +1,14 @@
+---
+import { profile } from '@data/profile';
+import { getDict, type Lang } from '@i18n/util';
+interface Props { lang?: Lang }
+const { lang = 'es' } = Astro.props as Props;
+const t = getDict(lang);
+const year = new Date().getFullYear();
+---
+<footer class="container-px">
+  <div class="mx-auto max-w-6xl border-t border-border py-8 text-sm text-muted">
+    <p>&copy; {year} {profile.name}. {t.footer.rights}</p>
+  </div>
+  <a href="#top" class="sr-only">Back to top</a>
+</footer>

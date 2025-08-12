@@ -1,0 +1,35 @@
+---
+import SEO from '@components/SEO.astro';
+import Header from '@components/Header.astro';
+import Footer from '@components/Footer.astro';
+import type { Lang } from '@i18n/util';
+import SkipLink from '@components/SkipLink.astro';
+import '@styles/globals.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noIndex?: boolean;
+  lang?: Lang;
+}
+const { title, description, noIndex, lang = 'es' } = Astro.props as Props;
+---
+<!doctype html>
+<html lang={lang} class="scroll-smooth" id="top">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <SEO {title} {description} {noIndex} />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <SkipLink />
+    <Header lang={lang} />
+    <main id="main" class="container-px">
+      <div class="mx-auto max-w-6xl py-8">
+        <slot />
+      </div>
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

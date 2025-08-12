@@ -1,0 +1,14 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import { projects } from '@data/projects';
+---
+<BaseLayout title="Proyectos | Portafolio" description="Proyectos seleccionados con descripciones y enlaces.">
+  <h1 class="text-2xl font-semibold tracking-tight">Proyectos</h1>
+  <p class="mt-2 max-w-prose text-muted">Una selección de trabajos recientes. Cada proyecto enfatiza la claridad y la experiencia de usuario.</p>
+  <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+    {projects.map((p) => (
+      <ProjectCard {...p} />
+    ))}
+  </div>
+</BaseLayout>

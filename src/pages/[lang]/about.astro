@@ -1,0 +1,36 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getDict, type Lang, LANGS } from '@i18n/util';
+import { profile } from '@data/profile';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Lang };
+const t = getDict(lang);
+---
+<BaseLayout title={t.about.title} description={t.about.intro} lang={lang}>
+  <article class="space-y-4">
+    <h1>{t.about.h1}</h1>
+    <p class="text-muted">{t.about.intro}</p>
+    <h2>{t.about.principles}</h2>
+    <ul class="list-disc pl-6 text-muted">
+      <li>{t.about.p1}</li>
+      <li>{t.about.p2}</li>
+      <li>{t.about.p3}</li>
+    </ul>
+    <h2>{t.about.tools}</h2>
+    <p class="text-muted">{t.about.toolsList}</p>
+
+    <div class="mt-6 card p-5">
+      <h2 class="font-semibold">{t.about.cv.h}</h2>
+      <p class="mt-2 text-sm text-muted">{t.about.cv.sub}</p>
+      <div class="mt-3 flex flex-wrap gap-3">
+        <a class="btn" href={profile.cv.en} download>Download CV (EN)</a>
+        <a class="btn-outline" href={profile.cv.es} download>Descargar CV (ES)</a>
+        <a class="btn-outline" href={profile.cv.alt} download>CV (Alt)</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+

@@ -1,0 +1,26 @@
+---
+import { altLang, swapLangInPath, type Lang } from '@i18n/util';
+
+interface Props { lang?: Lang }
+const { lang = 'es' } = Astro.props as Props;
+const other = altLang(lang);
+const href = swapLangInPath(Astro.url.pathname, other);
+const isEn = lang === 'en';
+---
+<a
+  href={href}
+  role="switch"
+  aria-checked={isEn}
+  aria-label={`Switch language to ${other.toUpperCase()}`}
+  class="relative inline-flex h-7 w-12 flex-shrink-0 cursor-pointer items-center rounded-full border border-border bg-card transition-colors hover:bg-card/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
+>
+  <span class="pointer-events-none absolute inset-0 flex items-center justify-between px-2 text-[10px] font-medium text-muted">
+    <span>ES</span>
+    <span>EN</span>
+  </span>
+  <span
+    aria-hidden="true"
+    class={"pointer-events-none absolute top-0.5 h-6 w-6 transform rounded-full bg-primary shadow-soft transition " + (isEn ? 'translate-x-5' : 'translate-x-0.5')}
+  ></span>
+</a>
+

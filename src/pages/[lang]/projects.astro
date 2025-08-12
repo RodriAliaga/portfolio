@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import { projects } from '@data/projects';
+import { cvProjects } from '@data/projects_cv';
+import { getDict, type Lang, LANGS } from '@i18n/util';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Lang };
+const t = getDict(lang);
+---
+<BaseLayout title={t.projects.title} description={t.projects.intro} lang={lang}>
+  <h1 class="text-2xl font-semibold tracking-tight">{t.projects.h1}</h1>
+  <p class="mt-2 max-w-prose text-muted">{t.projects.intro}</p>
+  <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+    {(cvProjects.length > 0 ? cvProjects : projects).map((p: any) => (
+      <ProjectCard {...p} lang={lang} />
+    ))}
+  </div>
+</BaseLayout>

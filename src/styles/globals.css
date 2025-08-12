@@ -1,0 +1,64 @@
+@import "@fontsource/inter/index.css";
+
+/* CSS variables for theming (HSL values) */
+:root {
+  --bg: 240 14% 98%;
+  --fg: 240 10% 10%;
+  --muted: 240 6% 40%;
+  --card: 0 0% 100%;
+  --border: 240 6% 90%;
+  /* Green theme */
+  --primary: 142 72% 40%;
+  --accent: 160 84% 39%;
+}
+.dark {
+  --bg: 240 10% 8%;
+  --fg: 0 0% 100%;
+  --muted: 240 5% 62%;
+  --card: 240 8% 12%;
+  --border: 240 8% 20%;
+  /* Green theme (dark adjustments) */
+  --primary: 142 72% 52%;
+  --accent: 160 84% 52%;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html:focus-within {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg text-fg antialiased font-sans leading-relaxed;
+  }
+  ::selection {
+    background-color: hsl(var(--accent) / 0.25);
+  }
+}
+
+@layer components {
+  .container-px {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-lg border border-transparent bg-primary px-4 py-2 text-white shadow-soft transition-colors hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 rounded-lg border border-border bg-transparent px-4 py-2 text-fg transition-colors hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary;
+  }
+  .card {
+    @apply rounded-2xl border border-border bg-card shadow-soft;
+  }
+}
+
+/* Reduced motion for respectful animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

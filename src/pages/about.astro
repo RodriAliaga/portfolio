@@ -1,0 +1,30 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { profile } from '@data/profile';
+---
+<BaseLayout title="Sobre mí | Portafolio" description="Sobre mí y mi forma de trabajo.">
+  <article class="space-y-4">
+    <h1>Sobre mí</h1>
+    <p class="text-muted">
+      Desarrollador web orientado a interfaces rápidas, accesibles y agradables. Priorizo el contenido claro, la jerarquía visual y la consistencia del sistema de diseño.
+    </p>
+    <h2>Principios</h2>
+    <ul class="list-disc pl-6 text-muted">
+      <li>Contenido primero; mejora progresiva.</li>
+      <li>Simplicidad sobre complejidad innecesaria.</li>
+      <li>Accesibilidad desde el inicio.</li>
+    </ul>
+    <h2>Herramientas</h2>
+    <p class="text-muted">Astro, TypeScript, Tailwind CSS y utilidades pequeñas y enfocadas.</p>
+
+    <div class="mt-6 card p-5">
+      <h2 class="font-semibold">Currículum Vitae</h2>
+      <p class="mt-2 text-sm text-muted">Descarga mi CV en tu idioma preferido.</p>
+      <div class="mt-3 flex flex-wrap gap-3">
+        <a class="btn" href={profile.cv.en} download>Download CV (EN)</a>
+        <a class="btn-outline" href={profile.cv.es} download>Descargar CV (ES)</a>
+        <a class="btn-outline" href={profile.cv.alt} download>CV (Alt)</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

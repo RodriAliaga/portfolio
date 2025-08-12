@@ -1,0 +1,89 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageToggle from './LanguageToggle.astro';
+import { profile } from '@data/profile';
+import { getDict, altLang, swapLangInPath, type Lang } from '@i18n/util';
+
+interface Props { lang?: Lang }
+const { lang = 'es' } = Astro.props as Props;
+const t = getDict(lang);
+const path = Astro.url.pathname;
+const other = altLang(lang);
+const switchHref = swapLangInPath(path, other);
+const links = [
+  { href: `/${lang}/`, label: t.nav.home },
+  { href: `/${lang}/projects`, label: t.nav.projects },
+  { href: `/${lang}/experience`, label: t.nav.experience },
+  { href: `/${lang}/about`, label: t.nav.about },
+  { href: `/${lang}/contact`, label: t.nav.contact },
+];
+---
+<header class="container-px">
+  <div class="mx-auto flex max-w-6xl items-center justify-between py-5">
+    <a href={`/${lang}/`} class="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary rounded-lg">
+      <img src="/favicon.svg" alt="Logo" class="h-8 w-8" />
+      <span class="font-semibold tracking-tight">Portafolio</span>
+    </a>
+    <nav class="hidden md:block">
+      <ul class="flex items-center gap-6">
+        {links.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              class="text-sm text-muted hover:text-fg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary rounded"
+              aria-current={Astro.url.pathname === l.href ? 'page' : undefined}
+            >{l.label}</a>
+          </li>
+        ))}
+        
+      </ul>
+    </nav>
+    <div class="flex items-center gap-2">
+      <ThemeToggle />
+      <LanguageToggle lang={lang} />
+      <a href={lang === 'en' ? profile.cv.en : profile.cv.es} download class="hidden md:inline-flex btn-outline">{t.nav.cv}</a>
+      <button class="md:hidden btn-outline" aria-label="Open menu" data-menu-toggle>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="md:hidden container-px" id="mobile-nav" hidden>
+    <ul class="mx-auto mb-4 max-w-6xl space-y-2 rounded-2xl border border-border bg-card p-4">
+      {links.map((l) => (
+        <li>
+          <a href={l.href} class="block rounded-lg px-3 py-2 text-muted hover:text-fg">{l.label}</a>
+        </li>
+      ))}
+      <li>
+        <a href={lang === 'en' ? profile.cv.en : profile.cv.es} download class="block rounded-lg px-3 py-2 text-muted hover:text-fg">{t.contact.cvLink}</a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const btn = (e.target instanceof Element) ? e.target.closest('[data-menu-toggle]') : null;
+    if (!btn) return;
+    const panel = document.getElementById('mobile-nav');
+    if (!panel) return;
+    const hidden = panel.hasAttribute('hidden');
+    if (hidden) panel.removeAttribute('hidden'); else panel.setAttribute('hidden', '');
+  });
+  // Close menu on navigation
+  document.getElementById('mobile-nav')?.addEventListener('click', (e) => {
+    if ((e.target instanceof Element) && e.target.tagName === 'A') {
+      document.getElementById('mobile-nav')?.setAttribute('hidden', '');
+    }
+  });
+  // Hide menu on resize to md+
+  const mq = window.matchMedia('(min-width: 768px)');
+  mq.addEventListener?.('change', () => {
+    if (mq.matches) document.getElementById('mobile-nav')?.setAttribute('hidden', '');
+  });
+  // Prefer reduced motion: avoid animated menu transitions for simplicity
+  // (no animation code present)
+  </script>

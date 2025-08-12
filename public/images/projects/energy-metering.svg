@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Plant-wide energy metering (Modbus RTU)">
+  <defs>
+    <linearGradient id="g4" x1="0" x2="1">
+      <stop offset="0%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="#0b0c0f"/>
+  <g transform="translate(50,50)">
+    <rect x="0" y="0" width="700" height="380" rx="18" fill="#111319" stroke="#283041"/>
+    <g transform="translate(28,28)">
+      <text x="0" y="0" fill="#e7e9ee" font-family="system-ui, sans-serif" font-size="22">Energy Metering</text>
+      <text x="0" y="26" fill="#a6adbb" font-family="system-ui, sans-serif" font-size="13">Modbus RTU · Grafana KPIs</text>
+      <!-- Meter icon -->
+      <g transform="translate(0,48)">
+        <rect x="0" y="0" width="140" height="160" rx="16" fill="url(#g4)"/>
+        <circle cx="70" cy="42" r="22" fill="#0b0c0f"/>
+        <rect x="26" y="76" width="88" height="10" rx="5" fill="#0b0c0f"/>
+        <rect x="26" y="94" width="88" height="10" rx="5" fill="#0b0c0f"/>
+      </g>
+      <!-- Bars / charts -->
+      <rect x="180" y="70" width="440" height="16" fill="#22c55e" rx="4"/>
+      <rect x="180" y="102" width="400" height="16" fill="#16a34a" rx="4"/>
+      <rect x="180" y="134" width="480" height="16" fill="#22c55e" rx="4"/>
+      <!-- Lightning bolt -->
+      <polygon points="690,60 650,130 680,130 650,190 720,110 690,110" fill="#22c55e"/>
+    </g>
+  </g>
+</svg>

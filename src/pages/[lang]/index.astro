@@ -1,0 +1,67 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProjectCard from '@components/ProjectCard.astro';
+import { projects } from '@data/projects';
+import { cvProjects } from '@data/projects_cv';
+import { getDict, type Lang, LANGS } from '@i18n/util';
+import { profile } from '@data/profile';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Lang };
+const t = getDict(lang);
+---
+<BaseLayout title={t.home.title} description={t.home.heroSubtitle} lang={lang}>
+  <section class="py-8">
+    <div class="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">
+          {t.home.heroTitle} <span class="text-primary">{profile.name}</span>.
+        </h1>
+        <p class="mt-3 max-w-prose text-muted">{t.home.heroSubtitle}</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="btn" href={`/${lang}/projects`}>{t.home.ctaProjects}</a>
+          <a class="btn-outline" href={`/${lang}/contact`}>{t.home.ctaContact}</a>
+          <a class="btn-outline" href={lang === 'en' ? profile.cv.en : profile.cv.es} download>{t.home.ctaCV}</a>
+        </div>
+      </div>
+      <div class="ml-auto">
+        <div class="card p-5">
+          <p class="text-sm text-muted">Available for freelance</p>
+          <p class="mt-1 text-lg font-semibold">Q4 2025</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-8">
+    <h2 class="text-xl font-semibold tracking-tight">{t.home.featured}</h2>
+    <div class="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
+      {(cvProjects.length > 0 ? cvProjects : projects).slice(0, 2).map((p: any) => (
+        <ProjectCard {...p} lang={lang} />
+      ))}
+    </div>
+    <div class="mt-6">
+      <a href={`/${lang}/projects`} class="btn-outline">{t.home.ctaProjects}</a>
+    </div>
+  </section>
+
+  <section class="py-8">
+    <h2 class="text-xl font-semibold tracking-tight">{t.home.values}</h2>
+    <ul class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <li class="card p-5">
+        <h3 class="font-semibold">{t.home.valueClarity.h}</h3>
+        <p class="mt-2 text-sm text-muted">{t.home.valueClarity.p}</p>
+      </li>
+      <li class="card p-5">
+        <h3 class="font-semibold">{t.home.valuePerf.h}</h3>
+        <p class="mt-2 text-sm text-muted">{t.home.valuePerf.p}</p>
+      </li>
+      <li class="card p-5">
+        <h3 class="font-semibold">{t.home.valueA11y.h}</h3>
+        <p class="mt-2 text-sm text-muted">{t.home.valueA11y.p}</p>
+      </li>
+    </ul>
+  </section>
+</BaseLayout>

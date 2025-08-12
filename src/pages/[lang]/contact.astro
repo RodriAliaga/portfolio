@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getDict, type Lang, LANGS } from '@i18n/util';
+import { profile } from '@data/profile';
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+const { lang } = Astro.params as { lang: Lang };
+const t = getDict(lang);
+---
+<BaseLayout title={t.contact.title} description={t.contact.intro} lang={lang}>
+  <h1 class="text-2xl font-semibold tracking-tight">{t.contact.h1}</h1>
+  <p class="mt-2 max-w-prose text-muted">{t.contact.intro}</p>
+  <div class="mt-6 grid gap-6 md:grid-cols-2">
+    <form class="card p-5" name="contact" netlify>
+      <label class="block text-sm font-medium">{t.contact.form.name}
+        <input class="mt-1 w-full rounded-lg border border-border bg-transparent px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" name="name" required />
+      </label>
+      <label class="mt-4 block text-sm font-medium">{t.contact.form.email}
+        <input type="email" class="mt-1 w-full rounded-lg border border-border bg-transparent px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" name="email" required />
+      </label>
+      <label class="mt-4 block text-sm font-medium">{t.contact.form.message}
+        <textarea class="mt-1 w-full rounded-lg border border-border bg-transparent px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" name="message" rows="5" required />
+      </label>
+      <div class="mt-4">
+        <button class="btn" type="submit">{t.contact.form.send}</button>
+      </div>
+      <p class="mt-2 text-xs text-muted">{t.contact.form.note}</p>
+    </form>
+
+    <div class="card p-5">
+      <h2 class="font-semibold">{t.contact.elsewhere}</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a class="hover:underline" href={`mailto:${lang === 'en' ? 'you@example.com' : 'tu-email@ejemplo.com'}`}>{lang === 'en' ? 'you@example.com' : 'tu-email@ejemplo.com'}</a></li>
+        <li><a class="hover:underline" href="#" rel="me">Twitter</a></li>
+        <li><a class="hover:underline" href="#">GitHub</a></li>
+        <li><a class="hover:underline" href="#">LinkedIn</a></li>
+        <li><a class="hover:underline" href={lang === 'en' ? profile.cv.en : profile.cv.es} download>{t.contact.cvLink}</a></li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>
+

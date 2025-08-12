@@ -1,0 +1,113 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { profile } from '@data/profile';
+import { cv } from '@data/cv';
+---
+<BaseLayout title="Experience | Portfolio" description="Professional experience and CV.">
+  <article class="space-y-6">
+    <header>
+      <h1 class="text-2xl font-semibold tracking-tight">Experience</h1>
+      <p class="mt-2 text-muted">Experiencia profesional de {profile.name}. Puedes visualizar o descargar el CV.</p>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <a class="btn" href={profile.cv.es} download>Descargar CV (ES)</a>
+        <a class="btn-outline" href={profile.cv.en} download>Download CV (EN)</a>
+        <a class="btn-outline" href={profile.cv.alt} download>CV (Alt)</a>
+      </div>
+    </header>
+
+    <section class="card p-4">
+      <h2 class="font-semibold">Vista previa del CV</h2>
+      <p class="mt-2 text-sm text-muted">Si tu navegador lo permite, abajo se muestra el CV embebido (ES). También puedes abrirlo en una pestaña nueva.</p>
+      <div class="mt-4">
+        <a class="btn-outline" href={profile.cv.es} target="_blank" rel="noreferrer">Abrir en nueva pestaña</a>
+      </div>
+      <div class="mt-4 aspect-[3/4] w-full overflow-hidden rounded-lg border border-border bg-card">
+        <object data={profile.cv.es} type="application/pdf" class="h-full w-full">
+          <p class="p-4 text-sm text-muted">No se pudo cargar la vista previa del PDF. <a class="underline" href={profile.cv.es} target="_blank" rel="noreferrer">Abrir CV</a></p>
+        </object>
+      </div>
+    </section>
+
+    {cv.summary && (
+      <section class="space-y-2">
+        <h2 class="text-xl font-semibold tracking-tight">Resumen</h2>
+        <p class="text-muted">{cv.summary}</p>
+      </section>
+    )}
+
+    {(cv.experience?.length > 0) && (
+      <section class="space-y-4">
+        <h2 class="text-xl font-semibold tracking-tight">Experiencia</h2>
+        <ul class="space-y-4">
+          {cv.experience.map((item) => (
+            <li class="card p-5">
+              <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                <h3 class="font-semibold">{item.role} · {item.company}</h3>
+                <span class="text-sm text-muted">{item.period}</span>
+              </div>
+              {item.bullets?.length > 0 && (
+                <ul class="mt-2 list-disc pl-5 text-sm text-muted">
+                  {item.bullets.map((b) => (<li>{b}</li>))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {((cv.skills.frontend.length + cv.skills.backend.length + cv.skills.devops.length + cv.skills.tools.length) > 0) && (
+      <section class="space-y-3">
+        <h2 class="text-xl font-semibold tracking-tight">Habilidades</h2>
+        <div class="grid gap-3 sm:grid-cols-2">
+          {cv.skills.frontend.length > 0 && (
+            <div class="card p-4">
+              <h3 class="font-semibold">Frontend</h3>
+              <p class="mt-1 text-sm text-muted">{cv.skills.frontend.join(', ')}</p>
+            </div>
+          )}
+          {cv.skills.backend.length > 0 && (
+            <div class="card p-4">
+              <h3 class="font-semibold">Backend</h3>
+              <p class="mt-1 text-sm text-muted">{cv.skills.backend.join(', ')}</p>
+            </div>
+          )}
+          {cv.skills.devops.length > 0 && (
+            <div class="card p-4">
+              <h3 class="font-semibold">DevOps/Cloud</h3>
+              <p class="mt-1 text-sm text-muted">{cv.skills.devops.join(', ')}</p>
+            </div>
+          )}
+          {cv.skills.tools.length > 0 && (
+            <div class="card p-4">
+              <h3 class="font-semibold">Herramientas</h3>
+              <p class="mt-1 text-sm text-muted">{cv.skills.tools.join(', ')}</p>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    {(cv.education.length > 0) && (
+      <section class="space-y-2">
+        <h2 class="text-xl font-semibold tracking-tight">Educación</h2>
+        <ul class="space-y-2 text-sm text-muted">
+          {cv.education.map((e) => (
+            <li>• {e.degree} · {e.institution} {e.year ? `· ${e.year}` : ''}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {(cv.languages.length > 0) && (
+      <section class="space-y-2">
+        <h2 class="text-xl font-semibold tracking-tight">Idiomas</h2>
+        <ul class="space-y-1 text-sm text-muted">
+          {cv.languages.map((l) => (
+            <li>• {l.name} — {l.level}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+  </article>
+</BaseLayout>

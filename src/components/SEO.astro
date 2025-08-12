@@ -1,0 +1,38 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noIndex?: boolean;
+}
+
+const {
+  title = 'Portfolio',
+  description = 'A minimal, fast, and accessible portfolio built with Astro.',
+  image = '/favicon.svg',
+  noIndex = false,
+} = Astro.props as Props;
+
+const site = Astro.site?.href?.replace(/\/$/, '') ?? 'https://example.com';
+const url = new URL(Astro.url.pathname, site).toString();
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+<link rel="canonical" href={url} />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={image.startsWith('http') ? image : site + image} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image.startsWith('http') ? image : site + image} />
+

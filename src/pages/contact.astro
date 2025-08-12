@@ -1,0 +1,36 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { profile } from '@data/profile';
+---
+<BaseLayout title="Contacto | Portafolio" description="Ponte en contacto — construyamos algo útil.">
+  <h1 class="text-2xl font-semibold tracking-tight">Contacto</h1>
+  <p class="mt-2 max-w-prose text-muted">¿Tienes un proyecto en mente? Me encantará conocerlo.</p>
+  <div class="mt-6 grid gap-6 md:grid-cols-2">
+    <form class="card p-5" name="contact" netlify>
+      <label class="block text-sm font-medium">Nombre
+        <input class="mt-1 w-full rounded-lg border border-border bg-transparent px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" name="name" required />
+      </label>
+      <label class="mt-4 block text-sm font-medium">Email
+        <input type="email" class="mt-1 w-full rounded-lg border border-border bg-transparent px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" name="email" required />
+      </label>
+      <label class="mt-4 block text-sm font-medium">Mensaje
+        <textarea class="mt-1 w-full rounded-lg border border-border bg-transparent px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary" name="message" rows="5" required />
+      </label>
+      <div class="mt-4">
+        <button class="btn" type="submit">Enviar</button>
+      </div>
+      <p class="mt-2 text-xs text-muted">Este formulario es estático. Conéctalo a tu backend o usa un servicio como Netlify Forms.</p>
+    </form>
+
+    <div class="card p-5">
+      <h2 class="font-semibold">En otros lugares</h2>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li><a class="hover:underline" href="mailto:tu-email@ejemplo.com">tu-email@ejemplo.com</a></li>
+        <li><a class="hover:underline" href="#" rel="me">Twitter</a></li>
+        <li><a class="hover:underline" href="#">GitHub</a></li>
+        <li><a class="hover:underline" href="#">LinkedIn</a></li>
+        <li><a class="hover:underline" href={profile.cv.es} download>Descargar CV</a></li>
+      </ul>
+    </div>
+  </div>
+</BaseLayout>

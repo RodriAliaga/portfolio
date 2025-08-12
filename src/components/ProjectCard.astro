@@ -1,0 +1,43 @@
+---
+import type { Lang } from '@i18n/util';
+export interface Props {
+  title: string | { en: string; es: string };
+  description: string | { en: string; es: string };
+  tags?: string[];
+  href?: string;
+  image?: string;
+  lang?: Lang;
+}
+const { title, description, tags = [], href = '#', image = undefined, lang = 'es' } = Astro.props as Props;
+const tTitle = typeof title === 'string' ? title : (lang === 'en' ? title.en : title.es);
+const tDesc = typeof description === 'string' ? description : (lang === 'en' ? description.en : description.es);
+---
+<article class="card overflow-hidden transition-transform hover:-translate-y-0.5">
+  {image ? (
+    <div class="relative h-48 w-full">
+      <img src={image} alt={tTitle} class="h-48 w-full object-cover" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.nextElementSibling?.removeAttribute('hidden')" />
+      <div hidden class="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10" />
+    </div>
+  ) : (
+    <div class="h-48 w-full bg-gradient-to-br from-primary/10 to-accent/10" />
+  )}
+  <div class="p-5">
+    <h3 class="text-lg font-semibold tracking-tight">
+      {href ? <a href={href} class="hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary rounded">{tTitle}</a> : tTitle}
+    </h3>
+    <p class="mt-2 text-sm text-muted">{tDesc}</p>
+    {tags.length > 0 && (
+      <ul class="mt-4 flex flex-wrap gap-2">
+        {tags.map((t) => (
+          <li class="rounded-full border border-border px-2.5 py-1 text-xs text-muted">{t}</li>
+        ))}
+      </ul>
+    )}
+  </div>
+  {href && (
+    <div class="px-5 pb-5">
+      <a class="btn btn-sm" href={href} aria-label={`Open ${title}`}>Visit</a>
+    </div>
+  )}
+  
+</article>

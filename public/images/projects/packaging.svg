@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img" aria-label="Packaging Line Automation & Controls — AB InBev, Santa Cruz">
+  <defs>
+    <linearGradient id="g2" x1="0" x2="1">
+      <stop offset="0%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="#0b0c0f"/>
+  <g transform="translate(50,50)">
+    <rect x="0" y="0" width="700" height="380" rx="18" fill="#111319" stroke="#283041"/>
+    <g transform="translate(28,28)">
+      <text x="0" y="0" fill="#e7e9ee" font-family="system-ui, sans-serif" font-size="22">Packaging Line Automation &amp; Controls</text>
+      <text x="0" y="26" fill="#a6adbb" font-family="system-ui, sans-serif" font-size="13">AB InBev · Santa Cruz · Modernization &amp; line improvements</text>
+      <!-- Conveyor -->
+      <rect x="0" y="220" width="640" height="18" rx="9" fill="#1a1f2a" stroke="#283041"/>
+      <!-- Boxes moving on conveyor -->
+      <g fill="url(#g2)">
+        <rect x="20" y="180" width="70" height="40" rx="6"/>
+        <rect x="140" y="180" width="70" height="40" rx="6"/>
+        <rect x="260" y="180" width="70" height="40" rx="6"/>
+        <rect x="380" y="180" width="70" height="40" rx="6"/>
+        <rect x="500" y="180" width="70" height="40" rx="6"/>
+      </g>
+      <!-- Control bars as KPIs -->
+      <rect x="0" y="70" width="420" height="16" fill="#22c55e" rx="4"/>
+      <rect x="0" y="100" width="520" height="16" fill="#16a34a" rx="4"/>
+      <rect x="0" y="130" width="600" height="16" fill="#22c55e" rx="4"/>
+      <!-- Impact label -->
+      <text x="560" y="120" fill="#22c55e" font-family="system-ui, sans-serif" font-size="28" font-weight="700">+31%</text>
+      <text x="560" y="145" fill="#a6adbb" font-family="system-ui, sans-serif" font-size="12">production (2 years)</text>
+    </g>
+  </g>
+</svg>
